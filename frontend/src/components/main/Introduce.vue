@@ -87,7 +87,7 @@
   </div>
   <div class="bgBox">
     <div class="row">
-      <div class="leftBox" style="padding: 40px">
+      <div class="leftBox" style="padding: 20px">
         <div>
           <img src="./../../assets/images/yellow_logo.png" alt="노란로고" />
         </div>
@@ -102,11 +102,11 @@
           차별화를 추구하여 보다 성장하는 브랜드가 되도록 최선을 다하겠습니다.
         </p>
       </div>
-      <div class="rightBox" style="padding: 40px">
+      <div class="rightBox" style="padding: 20px">
         <img
           src="./../../assets/images/section01.png"
           alt="#"
-          style="width: 100%; height: 100%"
+          style="width: 100%"
         />
       </div>
     </div>
