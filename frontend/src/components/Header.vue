@@ -1,16 +1,14 @@
 <template>
-  <q-layout view="hHh lpR fFf">
-    <q-header class="menuOutBox">
-      <q-toolbar>
-        <div class="col-2 menuBtn" @click="moveMain">LOGO</div>
-        <q-space></q-space>
-        <div class="col-2 menuBtn" @click="moveMenu">메뉴보기</div>
-        <div class="col-2 menuBtn" @click="moveNotice">공지사항</div>
-        <div class="col-2 menuBtn" @click="moveFindStore">매장찾기</div>
-        <div class="col-2 menuBtn" @click="moveLogin">로그인</div>
-      </q-toolbar>
-    </q-header>
-  </q-layout>
+  <header class="menuOutBox">
+    <q-toolbar>
+      <div class="col-2 menuBtn" @click="moveMain">LOGO</div>
+      <q-space></q-space>
+      <div class="col-2 menuBtn" @click="moveMenu">메뉴보기</div>
+      <div class="col-2 menuBtn" @click="moveNotice">공지사항</div>
+      <div class="col-2 menuBtn" @click="moveFindStore">매장찾기</div>
+      <div class="col-2 menuBtn" @click="moveLogin">로그인</div>
+    </q-toolbar>
+  </header>
 </template>
 
 <script>
