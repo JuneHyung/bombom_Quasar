@@ -2,14 +2,30 @@
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/Index.vue') }
-    ]
+    name: 'Main',
+    component: () => import('./../layouts/MainPage.vue')
+  },
+  {
+    path: '/notice',
+    name: 'Notice',
+    component: () => import('./../layouts/Notice.vue')
+  },
+  {
+    path: '/menu',
+    name: 'Menu',
+    component: () => import('./../layouts/Menu.vue')
+  },
+  {
+    path: '/find',
+    name: 'Find',
+    component: () => import('./../layouts/Find.vue')
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('./../layouts/Login.vue')
   },
 
-  // Always leave this as last one,
-  // but you can also remove it
   {
     path: '/:catchAll(.*)*',
     component: () => import('pages/Error404.vue')
