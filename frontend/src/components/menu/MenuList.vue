@@ -17,20 +17,29 @@
             :key="i"
             :name="names"
             :label="names"
-          ></q-tab>
+            @click="getMenuList(names)"
+          >
+          </q-tab>
         </q-tabs>
 
         <q-separator />
 
         <q-tab-panels v-model="tab" animated>
-          <q-tab-panel
-            v-for="(tab, i) in tabContents"
-            :key="i"
-            :name="tab.menuType"
-          >
-            <h6>{{ tab.menuTitle }}</h6>
-            <div>
-              {{ tab.menuDesc }}
+          <q-tab-panel :name="tabNames[curIdx]" class="row">
+            <div class="col-4" v-for="(tabs, i) in tabContents" :key="i">
+              <q-card>
+                <q-img
+                  src="~assets/images/menu/coffee/menu01_img01.png"
+                ></q-img>
+                <div class="row" style="line-height: 60px">
+                  <p class="col-6" style="margin: 0; text-align: center">
+                    {{ tabs.menuName }}
+                  </p>
+                  <p class="col-6" style="margin: 0; text-align: center">
+                    {{ tabs.menuPrice }}
+                  </p>
+                </div>
+              </q-card>
             </div>
           </q-tab-panel>
         </q-tab-panels>
@@ -41,76 +50,46 @@
 
 <script>
 import { defineComponent, ref } from "vue";
+import { api } from "./../../boot/axios.js";
 export default defineComponent({
   name: "menuList",
+  created() {
+    this.getMenuList("new");
+  },
   setup() {
+    let curIdx = ref(0);
     const tabNames = [
-      "NEW",
-      "COFFEE",
-      "LATTE",
-      "SMOOTHIE",
-      "ADE",
-      "TEA",
-      "JUICE",
-      "BUBBLE",
-      "SIDEMENU",
+      "new",
+      "coffee",
+      "latte",
+      "smoothie",
+      "ade",
+      "tea",
+      "juice",
+      "bubble",
+      "sidemenu",
     ];
-    const tabContents = [
-      {
-        menuType: "COFFEE",
-        menuTitle: "커피 1번",
-        menuDesc: "커피1 입니다.",
-      },
-      {
-        menuType: "LATTE",
-        menuTitle: "라떼 2번",
-        menuDesc: "라떼 2번 입니다.",
-      },
-      {
-        menuType: "ADE",
-        menuTitle: "에이드 3번",
-        menuDesc: "에이드 3번 입니다.",
-      },
-      {
-        menuType: "SMOOTHIE",
-        menuTitle: "스무디 4번",
-        menuDesc: "스무디 4번 입니다.",
-      },
-      {
-        menuType: "NEW",
-        menuTitle: "신상품 5번",
-        menuDesc: "신상품 5번 입니다.",
-      },
-      {
-        menuType: "ADE",
-        menuTitle: "에이드 6번",
-        menuDesc: "에이드 6번 입니다.",
-      },
-      {
-        menuType: "TEA",
-        menuTitle: "티 7번",
-        menuDesc: "티 7번 입니다.",
-      },
-      {
-        menuType: "BUBBLE",
-        menuTitle: "버블티 8번",
-        menuDesc: "버블티 8번 입니다.",
-      },
-      {
-        menuType: "SIDEMENU",
-        menuTitle: "사이드메뉴 9번",
-        menuDesc: "사이드메뉴 9번 입니다.",
-      },
-      {
-        menuType: "JUICE",
-        menuTitle: "쥬스 10번",
-        menuDesc: "쥬스 10번 입니다.",
-      },
-    ];
+    let tabContents = ref([]);
+
+    async function getMenuList(type) {
+      this.tabContents.splice(0);
+      this.baseurl += type;
+
+      await api
+        .get(`/menu/${type}`)
+        .then(({ data }) => {
+          this.tabContents = data;
+          this.curIdx = this.tabNames.indexOf(type);
+        })
+        .catch((err) => console.log(err));
+    }
+
     return {
-      tab: ref("NEW"),
+      tab: ref("new"),
       tabNames,
       tabContents,
+      curIdx,
+      getMenuList,
     };
   },
 });
