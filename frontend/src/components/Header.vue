@@ -1,7 +1,9 @@
 <template>
   <header class="menuOutBox">
     <q-toolbar>
-      <div class="col-2 menuBtn" @click="moveMain">LOGO</div>
+      <div class="col-2 menuBtn" @click="moveMain">
+        <img src="~assets/images/logo.png" alt="로고" class="logoImg" />
+      </div>
       <q-space></q-space>
       <div class="col-2 menuBtn" @click="moveMenu">메뉴보기</div>
       <div class="col-2 menuBtn" @click="moveNotice">공지사항</div>
@@ -52,5 +54,10 @@ export default defineComponent({
 .menuBtn {
   cursor: pointer;
   text-align: center;
+}
+.logoImg {
+  width: 160px;
+  height: 60px;
+  margin: 10px auto;
 }
 </style>
