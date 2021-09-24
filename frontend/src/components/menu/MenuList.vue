@@ -29,7 +29,7 @@
             <div class="col-4" v-for="(tabs, i) in tabContents" :key="i">
               <q-card>
                 <q-img
-                  src="~assets/images/menu/coffee/menu01_img01.png"
+                  :src="`images/menu/${tabs.menuType}/${tabs.menuImg}`"
                 ></q-img>
                 <div class="row" style="line-height: 60px">
                   <p class="col-6" style="margin: 0; text-align: center">
