@@ -1,12 +1,37 @@
-import state from './state'
-import * as getters from './getters'
-import * as mutations from './mutations'
-import * as actions from './actions'
+// import state from './state'
+// import * as mutations from './mutations'
 
-export default {
-  namespaced: true,
-  getters,
-  mutations,
+import actions from './actions.js';
+
+export const bombom = {
+  getters: {
+    getSInfo(state) { return state.items },
+    getLInfo(state) { return state.locArr }
+  },
+  mutations: {
+    setStore(state, store) {
+      state.items.splice(0);
+      state.locArr.splice(0);
+      store.forEach(el => {
+        const sInfo = {
+          shopNo: el.shopNo,
+          locName: el.locName,
+          shopName: el.shopName,
+          shopTel: el.shopTel,
+          shopAddress: el.shopTel,
+        }
+        const lInfo = {
+          lat: Number(el.lat),
+          lng: Number(el.lng),
+        }
+        state.items.push(sInfo);
+        state.locArr.push(lInfo);
+      })
+    }
+  },
   actions,
-  state
+  state: {
+    items: [],
+    locArr:[],
+  }
 }

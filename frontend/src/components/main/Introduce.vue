@@ -69,7 +69,14 @@
         </p>
       </div>
       <div class="rightBox">
-        <div>지도</div>
+        <GoogleMap
+          :api-key="api_key"
+          :center="pos[0]"
+          style="width: 100%; height: 500px"
+          :zoom="20"
+        >
+          <Marker v-for="(m, i) in pos" :key="i" :options="{ position: m }" />
+        </GoogleMap>
       </div>
     </div>
     <div class="row">
@@ -81,7 +88,14 @@
         </p>
       </div>
       <div class="rightBox">
-        <div>지도</div>
+        <GoogleMap
+          :api-key="api_key"
+          :center="pos[1]"
+          style="width: 100%; height: 500px"
+          :zoom="20"
+        >
+          <Marker v-for="(m, i) in pos" :key="i" :options="{ position: m }" />
+        </GoogleMap>
       </div>
     </div>
   </div>
@@ -115,11 +129,30 @@
 
 <script>
 import { defineComponent } from "vue";
-
+// import GMap from "../find/GMap.vue";
+import { GoogleMap, Marker } from "vue3-google-map";
+import { api_key } from "./../../api/map.js";
 export default defineComponent({
   name: "Introduce",
+  components: {
+    GoogleMap,
+    Marker,
+  },
   setup() {
-    return {};
+    const pos = [
+      {
+        lat: 35.8597,
+        lng: 128.611546,
+      },
+      {
+        lat: 36.327998,
+        lng: 127.428815,
+      },
+    ];
+    return {
+      api_key,
+      pos,
+    };
   },
 });
 </script>

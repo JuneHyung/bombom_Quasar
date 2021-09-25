@@ -1,6 +1,6 @@
 import { store } from 'quasar/wrappers'
 import { createStore } from 'vuex'
-
+import { bombom } from './module-example/index';
 // import example from './module-example'
 
 /*
@@ -15,7 +15,7 @@ import { createStore } from 'vuex'
 export default store(function (/* { ssrContext } */) {
   const Store = createStore({
     modules: {
-      // example
+      bombom
     },
 
     // enable strict mode (adds overhead!)
