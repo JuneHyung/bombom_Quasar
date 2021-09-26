@@ -6,7 +6,8 @@ import actions from './actions.js';
 export const bombom = {
   getters: {
     getSInfo(state) { return state.items },
-    getLInfo(state) { return state.locArr }
+    getLInfo(state) { return state.locArr },
+    getNoticeInfo(state) { return state.notices},
   },
   mutations: {
     setStore(state, store) {
@@ -27,11 +28,24 @@ export const bombom = {
         state.items.push(sInfo);
         state.locArr.push(lInfo);
       })
+    },
+    setNotice(state, notice) {
+      notice.forEach(el => {
+        const nInfo = {
+          noticeContent: el.noticeContent,
+          noticeDate: el.noticeDate,
+          noticeNo: el.noticeNo,
+          noticeTitle: el.noticeTitle,
+          noticeView: el.noticeView,
+        }
+        state.notices.push(nInfo);
+      })
     }
   },
   actions,
   state: {
     items: [],
-    locArr:[],
+    locArr: [],
+    notices: [],
   }
 }
