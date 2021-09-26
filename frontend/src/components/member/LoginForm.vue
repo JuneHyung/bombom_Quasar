@@ -1,36 +1,41 @@
 <template>
-  <q-card class="my-card">
-    <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
+  <q-card
+    class="my-card"
+    style="width: calc(100% - 600px); margin: 26.85vh auto"
+  >
+    <q-form
+      class="q-gutter-md"
+      style="width: calc(100% - 100px); margin: 0 auto; padding: 20px"
+    >
       <q-input
-        filled
-        v-model="name"
-        label="Your name *"
-        hint="Name and surname"
+        v-model="id"
+        label="Your id *"
         lazy-rules
-        :rules="[(val) => (val && val.length > 0) || 'Please type something']"
+        :rules="[(val) => (val && val.length > 0) || 'Please type your id']"
       />
 
       <q-input
-        filled
-        type="number"
-        v-model="age"
-        label="Your age *"
+        v-model="password"
+        label="Your Password *"
+        type="password"
         lazy-rules
         :rules="[
-          (val) => (val !== null && val !== '') || 'Please type your age',
-          (val) => (val > 0 && val < 100) || 'Please type a real age',
+          (val) => (val !== null && val !== '') || 'Please type your pw',
+          (val) =>
+            (val.length > 8 && val.length < 16) || 'Please type a real pw',
         ]"
       />
 
-      <div>
-        <q-btn label="Submit" type="submit" color="primary" />
+      <div align="right">
         <q-btn
-          label="Reset"
+          label="초기화"
           type="reset"
-          color="primary"
           flat
           class="q-ml-sm"
+          @click="onReset()"
         />
+        <q-btn label="회원가입" flat />
+        <q-btn label="로그인" flat></q-btn>
       </div>
     </q-form>
   </q-card>
@@ -38,44 +43,21 @@
 
 <script>
 import { defineComponent } from "vue";
-import { useQuasar } from "quasar";
 import { ref } from "vue";
 
 export default defineComponent({
   name: "LoginForm",
   setup() {
-    const $q = useQuasar();
-
-    const name = ref(null);
-    const age = ref(null);
-    const accept = ref(true);
-
+    const id = ref(null);
+    const password = ref(null);
+    function onReset() {
+      id.value = null;
+      password.value = null;
+    }
     return {
-      name,
-      age,
-      accept,
-      onSubmit() {
-        if (accept.value !== true) {
-          $q.notify({
-            color: "red-5",
-            textColor: "white",
-            icon: "warning",
-            message: "You need to accept the license and terms first",
-          });
-        } else {
-          $q.notify({
-            color: "green-4",
-            textColor: "white",
-            icon: "cloud_done",
-            message: "Submitted",
-          });
-        }
-      },
-
-      onReset() {
-        name.value = null;
-        age.value = null;
-      },
+      id,
+      password,
+      onReset,
     };
   },
 });
